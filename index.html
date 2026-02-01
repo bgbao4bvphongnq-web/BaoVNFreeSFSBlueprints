@@ -3,221 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BaoVN Free SFS Blueprints</title>
+<title>BaoVN Free SFS BP</title>
 
 <style>
 body{
   margin:0;
-  padding:20px;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#0f172a;
+  font-family:Arial;
+  background:#020617;
   color:#e5e7eb;
+  text-align:center
 }
-h1{
-  text-align:center;
-  color:#38bdf8;
-  margin-bottom:25px;
-}
-
-/* blueprint card */
+h1{color:#38bdf8}
 .card{
   background:#020617;
-  border-radius:12px;
-  padding:16px;
-  margin:12px 0;
-  box-shadow:0 0 12px rgba(56,189,248,.15);
-}
-.desc{
-  color:#cbd5f5;
-  margin-bottom:10px;
-  font-size:15px;
-}
-.btn{
-  padding:10px 18px;
   border:1px solid #38bdf8;
-  background:#020617;
+  margin:12px;
+  padding:12px;
+  border-radius:8px
+}
+button{
+  background:none;
   color:#38bdf8;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
+  border:1px solid #38bdf8;
+  padding:8px 16px;
+  border-radius:6px;
+  font-weight:bold
 }
-
-/* ===== OVERLAY ===== */
-#ov{
-  position:fixed;
-  inset:0;
-  display:none;
-  z-index:9999;
-  overflow:hidden;
-}
-.space{
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle,#020617,#000),
-    url("https://i.imgur.com/9QO4F0D.png");
-  background-size:cover;
-}
-
-/* rocket */
 .rocket{
-  position:absolute;
-  width:160px;
-  height:auto;
+  position:fixed;
+  bottom:-150px;
   left:50%;
-  bottom:-220px;
   transform:translateX(-50%);
-  animation:fly 2.6s ease-in forwards;
-  z-index:3;
-  pointer-events:none;
+  width:100px;
+  animation:fly 6s linear infinite;
+  pointer-events:none
 }
-
-/* flame */
-.flame{
-  position:absolute;
-  left:50%;
-  bottom:-260px;
-  width:500px;
-  height:500px;
-  transform:translateX(-50%);
-  background:radial-gradient(circle,#fff2b0 0%,#ff9f00 30%,#ff3c00 55%,transparent 75%);
-  filter:blur(25px);
-  animation:blast 2.6s ease-in forwards;
-  z-index:1;
-}
-
-/* loading */
-.load{
-  position:absolute;
-  bottom:15%;
-  width:100%;
-  text-align:center;
-  z-index:4;
-}
-.spin{
-  width:50px;
-  height:50px;
-  margin:0 auto 14px;
-  border:5px solid #1e293b;
-  border-top:5px solid #38bdf8;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-}
-.txt{
-  color:#38bdf8;
-  letter-spacing:2px;
-  animation:flicker .15s infinite;
-}
-
-/* animations */
 @keyframes fly{
-  to{
-    transform:translate(-50%,-150vh) scale(1.05);
-  }
+  0%{bottom:-150px}
+  100%{bottom:120%}
 }
-@keyframes blast{
-  to{
-    transform:translateX(-50%) scale(5);
-    opacity:0;
-  }
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes flicker{50%{opacity:.6}}
 </style>
 </head>
 
 <body>
-
 <h1>🚀 BaoVN Free SFS Blueprints</h1>
 
-<!-- ===== BP LIST (ĐỦ BP) ===== -->
-
 <div class="card">
-  <div class="desc">Rocket components</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/8zyuZFMaEe6eJ7uAd13aUA')">Open This</button>
+Rocket components<br>
+<button onclick="go('https://sharing.spaceflightsimulator.app/rocket/8zyuZFMaEe6eJ7uAd13aUA')">OPEN</button>
 </div>
 
 <div class="card">
-  <div class="desc">Soyuz Blueprint</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/CP1ahleaEe6eNLuAd13aUA')">Open This</button>
+Soyuz Blueprint<br>
+<button onclick="go('https://sharing.spaceflightsimulator.app/rocket/CP1ahleaEe6eNLuAd13aUA')">OPEN</button>
 </div>
 
 <div class="card">
-  <div class="desc">Space Shuttle + Space Cruiser + more</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/tcCdu11SEe6eRLuAd13aUA')">Open This</button>
+Saturn V<br>
+<button onclick="go('https://sharing.spaceflightsimulator.app/rocket/s9CLL0LFEe-ZFDmvLffn8g')">OPEN</button>
 </div>
 
-<div class="card">
-  <div class="desc">Rocket components 2 (No DLC)</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/zM-6lXc0Ee6edbuAd13aUA')">Open This</button>
-</div>
-
-<div class="card">
-  <div class="desc">Satellite</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/mAMsVK14Ee6LZkVkBXBP0w')">Open This</button>
-</div>
-
-<div class="card">
-  <div class="desc">Big Delta Rocket (100 Boosters)</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/TAz2FbE3Ee6LZkVkBXBP0w')">Open This</button>
-</div>
-
-<div class="card">
-  <div class="desc">1000x Efficient Rocket</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/VB0jkrHhEe6LZkVkBXBP0w')">Open This</button>
-</div>
-
-<div class="card">
-  <div class="desc">Impossible Challenge</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/tZC7ONyjEe6LqEVkBXBP0w')">Open This</button>
-</div>
-
-<div class="card">
-  <div class="desc">Falcon Heavy with Starlink</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/j1XwNRnrEe-3PuNyTkiz9w')">Open This</button>
-</div>
-
-<div class="card">
-  <div class="desc">Large Rocket – 18 Satellites</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/SgHYe0FDEe-ZEjmvLffn8g')">Open This</button>
-</div>
-
-<div class="card">
-  <div class="desc">Saturn V</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/s9CLL0LFEe-ZFDmvLffn8g')">Open This</button>
-</div>
-
-<div class="card">
-  <div class="desc">Large Rocket – 72 Satellites</div>
-  <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/Evt1fFNDEe-ZLzmvLffn8g')">Open This</button>
-</div>
-
-<!-- ===== OVERLAY ===== -->
-<div id="ov">
-  <div class="space"></div>
-  <img class="rocket" src="./rocket.jpg" alt="rocket">
-  <div class="flame"></div>
-  <div class="load">
-    <div class="spin"></div>
-    <div class="txt">PLS WAIT, OPENING BP</div>
-  </div>
-</div>
+<img src="rocket.jpg" class="rocket">
 
 <script>
-const ov = document.getElementById("ov");
-
-function openBP(url){
-  ov.style.display = "block";
-  window.open(url, "_blank");
-}
-
-/* quay lại tab thì tắt overlay */
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) {
-    ov.style.display = "none";
-  }
-});
+function go(url){window.open(url,'_blank')}
 </script>
-
 </body>
   </html>
