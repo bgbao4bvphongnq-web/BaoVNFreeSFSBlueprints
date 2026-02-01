@@ -3,167 +3,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BaoVN Free SFS Blueprints</title>
+<title>BaoVN :: SYSTEM CORE</title>
 
 <style>
-/* ===== BASE ===== */
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:Arial;
-  background:#020617;
-  color:#e5e7eb;
-  text-align:center;
-  overflow-x:hidden
-}
-h1{
-  color:#38bdf8;
-  margin:30px 0;
-  animation:glow 2s ease-in-out infinite alternate
-}
-@keyframes glow{
-  from{text-shadow:0 0 5px #38bdf8}
-  to{text-shadow:0 0 20px #38bdf8}
+  font-family:monospace;
+  background:#000;
+  color:#00ff9c;
 }
 
-/* ===== STAR BACKGROUND ===== */
-.stars{
+/* scanline */
+body::after{
+  content:"";
   position:fixed;
   inset:0;
-  background:
-    radial-gradient(1px 1px at 20% 30%,#fff,transparent),
-    radial-gradient(1px 1px at 70% 60%,#fff,transparent),
-    radial-gradient(1px 1px at 40% 80%,#fff,transparent),
-    radial-gradient(1px 1px at 90% 10%,#fff,transparent);
-  animation:stars 20s linear infinite;
-  z-index:-2
-}
-@keyframes stars{
-  from{background-position:0 0}
-  to{background-position:0 1000px}
-}
-
-/* ===== ROCKET ===== */
-.rocket{
-  position:fixed;
-  bottom:-200px;
-  left:50%;
-  transform:translateX(-50%);
-  width:120px;
-  opacity:.4;
-  animation:
-    fly 6s linear infinite,
-    shake .15s infinite;
+  background:repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.05) 1px,
+    transparent 2px,
+    transparent 4px
+  );
   pointer-events:none;
-  z-index:-1
-}
-@keyframes fly{
-  0%{bottom:-200px}
-  100%{bottom:120%}
-}
-@keyframes shake{
-  50%{transform:translateX(-50%) rotate(1deg)}
 }
 
-/* ===== BP CARD ===== */
+/* GLITCH */
+.glitch{
+  position:relative;
+  text-align:center;
+  font-size:26px;
+  letter-spacing:4px;
+  margin:18px 0;
+  animation:shake .12s infinite;
+}
+.glitch::before,.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  left:0;width:100%;
+}
+.glitch::before{
+  color:#ff004c;
+  transform:translate(-2px,0);
+  clip-path:inset(0 0 55% 0);
+  animation:g1 .2s infinite;
+}
+.glitch::after{
+  color:#00eaff;
+  transform:translate(2px,0);
+  clip-path:inset(45% 0 0 0);
+  animation:g2 .25s infinite;
+}
+@keyframes g1{50%{clip-path:inset(20% 0 30% 0)}}
+@keyframes g2{50%{clip-path:inset(10% 0 50% 0)}}
+@keyframes shake{50%{transform:translate(1px,0)}}
+
+/* cards */
 .card{
-  margin:14px;
-  padding:16px;
-  border-radius:12px;
-  border:1px solid #38bdf8;
-  background:rgba(2,6,23,.85);
-  transition:.3s;
-  animation:fadeUp .6s ease both
+  max-width:760px;
+  margin:12px auto;
+  padding:14px;
+  border:1px solid #00ff9c;
+  background:#020202;
+  box-shadow:0 0 18px #00ff9c33;
 }
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:none}
+.btn{
+  width:100%;
+  padding:12px;
+  margin-top:8px;
+  background:#000;
+  color:#00ff9c;
+  border:1px solid #00ff9c;
+  cursor:pointer;
 }
-.card:hover{
-  box-shadow:0 0 25px #38bdf8;
-  transform:scale(1.03)
-}
-button{
-  margin-top:10px;
-  padding:8px 20px;
-  border-radius:6px;
-  border:1px solid #38bdf8;
-  background:none;
-  color:#38bdf8;
-  font-weight:bold;
-  transition:.3s
-}
-button:hover{
-  background:#38bdf8;
-  color:#020617
-}
+.btn:hover{background:#00ff9c;color:#000}
 
-/* ===== LOADING OVERLAY ===== */
-#wait{
+/* overlay */
+#ov{
   position:fixed;
   inset:0;
-  background:rgba(2,6,23,.95);
+  background:#000;
   display:none;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  z-index:10
+  z-index:999;
 }
-.spin{
-  width:50px;height:50px;
-  border:5px solid #1e293b;
-  border-top:5px solid #38bdf8;
-  border-radius:50%;
-  animation:spin 1s linear infinite
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-#count{
-  margin-top:14px;
-  color:#38bdf8;
-  animation:flicker .2s infinite
-}
-@keyframes flicker{
-  50%{opacity:.6}
-}
+#percent{font-size:26px;margin-top:10px}
+.bar{width:260px;height:10px;border:1px solid #00ff9c}
+.fill{height:100%;width:0;background:#00ff9c}
 </style>
 </head>
 
 <body>
-<div class="stars"></div>
 
-<h1>🚀 BaoVN Free SFS Blueprints</h1>
+<div class="glitch" data-text="SYSTEM ACCESS">SYSTEM ACCESS</div>
 
-<div class="card">Rocket components
-<br><button onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/8zyuZFMaEe6eJ7uAd13aUA')">OPEN</button></div>
+<!-- ===== FULL BP LIST ===== -->
 
-<div class="card">Soyuz Blueprint
-<br><button onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/CP1ahleaEe6eNLuAd13aUA')">OPEN</button></div>
+<div class="card"><div>Rocket Components</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/8zyuZFMaEe6eJ7uAd13aUA')">EXECUTE</button></div>
 
-<div class="card">Saturn V
-<br><button onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/s9CLL0LFEe-ZFDmvLffn8g')">OPEN</button></div>
+<div class="card"><div>Soyuz Blueprint</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/CP1ahleaEe6eNLuAd13aUA')">EXECUTE</button></div>
 
-<img src="rocket.jpg" class="rocket">
+<div class="card"><div>Space Shuttle + Space Cruiser</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/tcCdu11SEe6eRLuAd13aUA')">EXECUTE</button></div>
 
-<div id="wait">
-  <div class="spin"></div>
-  <div id="count">OPENING IN 5</div>
+<div class="card"><div>Rocket Components 2 (No DLC)</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/zM-6lXc0Ee6edbuAd13aUA')">EXECUTE</button></div>
+
+<div class="card"><div>Satellite</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/mAMsVK14Ee6LZkVkBXBP0w')">EXECUTE</button></div>
+
+<div class="card"><div>Big Delta Rocket (100 Boosters)</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/TAz2FbE3Ee6LZkVkBXBP0w')">EXECUTE</button></div>
+
+<div class="card"><div>1000x Efficient Rocket</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/VB0jkrHhEe6LZkVkBXBP0w')">EXECUTE</button></div>
+
+<div class="card"><div>Impossible Challenge</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/tZC7ONyjEe6LqEVkBXBP0w')">EXECUTE</button></div>
+
+<div class="card"><div>Falcon Heavy with Starlink</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/j1XwNRnrEe-3PuNyTkiz9w')">EXECUTE</button></div>
+
+<div class="card"><div>Large Rocket – 18 Satellites</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/SgHYe0FDEe-ZEjmvLffn8g')">EXECUTE</button></div>
+
+<div class="card"><div>Saturn V</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/s9CLL0LFEe-ZFDmvLffn8g')">EXECUTE</button></div>
+
+<div class="card"><div>Large Rocket – 72 Satellites</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/Evt1fFNDEe-ZLzmvLffn8g')">EXECUTE</button></div>
+
+<!-- ===== OVERLAY ===== -->
+<div id="ov">
+  <div class="glitch" data-text="THE SYSTEM IS CURRENTLY UNDER PROCESSING">
+    THE SYSTEM IS CURRENTLY UNDER PROCESSING
+  </div>
+  <div id="percent">1%</div>
+  <div class="bar"><div class="fill" id="fill"></div></div>
 </div>
 
 <script>
-let timer;
 function openBP(url){
-  let t=5;
-  wait.style.display="flex";
-  count.textContent="OPENING IN "+t;
-  timer=setInterval(()=>{
-    t--;
-    count.textContent="OPENING IN "+t;
-    if(t<=0){
-      clearInterval(timer);
-      location.href=url;
+  const ov=document.getElementById("ov");
+  const p=document.getElementById("percent");
+  const f=document.getElementById("fill");
+  let i=1;
+  ov.style.display="flex";
+
+  const t=setInterval(()=>{
+    i++;
+    p.textContent=i+"%";
+    f.style.width=i+"%";
+    if(i>=100){
+      clearInterval(t);
+      window.open(url,"_blank");
+      ov.style.display="none";
+      f.style.width="0%";
+      p.textContent="1%";
     }
-  },1000);
+  },50);
 }
 </script>
+
 </body>
   </html>
