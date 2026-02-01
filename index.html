@@ -27,34 +27,39 @@ body::after{
     transparent 2px,
     transparent 5px
   );
-  animation:scan 6s linear infinite;
   pointer-events:none;
-}
-@keyframes scan{
-  from{background-position:0 0}
-  to{background-position:0 120px}
+  z-index:2;
 }
 
-/* glitch title */
+/* header glitch */
 .glitch{
   position:relative;
   text-align:center;
   font-size:28px;
-  letter-spacing:4px;
-  margin:24px 0;
-  animation:glitchMove 2s infinite;
+  letter-spacing:3px;
+  margin:26px 0;
 }
 .glitch::before,.glitch::after{
   content:attr(data-text);
   position:absolute;
-  left:0;width:100%;
+  left:0;
+  width:100%;
+  opacity:.6;
 }
-.glitch::before{color:#00eaff;animation:gl1 .2s infinite}
-.glitch::after{color:#00ff9c;animation:gl2 .15s infinite}
+.glitch::before{color:#00eaff}
+.glitch::after{color:#00ff9c}
 
-@keyframes gl1{50%{transform:translate(-2px,-1px)}}
-@keyframes gl2{50%{transform:translate(2px,1px)}}
-@keyframes glitchMove{50%{transform:skewX(1deg)}}
+@keyframes glitchMove{
+  0%{transform:translate(0)}
+  20%{transform:translate(-1px,1px)}
+  40%{transform:translate(1px,-1px)}
+  60%{transform:translate(-1px,0)}
+  80%{transform:translate(1px,1px)}
+  100%{transform:translate(0)}
+}
+.glitch::before,.glitch::after{
+  animation:glitchMove .35s infinite;
+}
 
 /* cards */
 .card{
@@ -63,16 +68,25 @@ body::after{
   padding:16px;
   border:1px solid #00ff9c;
   background:#02050a;
-  box-shadow:0 0 18px #00ff9c22;
-  animation:float 4s ease-in-out infinite;
-  transition:.3s;
+  box-shadow:0 0 14px #00ff9c22;
+  animation:rise .6s ease-out both, glow 3s infinite;
+  animation-delay:calc(var(--i) * .08s);
 }
+.card div{font-size:15px}
+
+@keyframes rise{
+  from{opacity:0;transform:translateY(40px) scale(.96)}
+  to{opacity:1;transform:none}
+}
+@keyframes glow{
+  0%{box-shadow:0 0 10px #00ff9c33}
+  50%{box-shadow:0 0 26px #00ff9c88}
+  100%{box-shadow:0 0 10px #00ff9c33}
+}
+
 .card:hover{
   transform:scale(1.03);
-  box-shadow:0 0 35px #00ff9c;
-}
-@keyframes float{
-  50%{transform:translateY(-4px)}
+  transition:.25s;
 }
 
 /* button */
@@ -84,16 +98,10 @@ body::after{
   color:#000;
   border:none;
   font-weight:bold;
-  letter-spacing:3px;
+  letter-spacing:2px;
   cursor:pointer;
-  position:relative;
-  overflow:hidden;
-  animation:pulse 1.6s infinite;
 }
 .btn:hover{background:#00eaff}
-@keyframes pulse{
-  50%{box-shadow:0 0 20px #00ff9c}
-}
 
 /* overlay */
 #ov{
@@ -106,9 +114,7 @@ body::after{
   flex-direction:column;
   z-index:999;
 }
-#percent{margin-top:12px;font-size:22px;animation:flicker .12s infinite}
-@keyframes flicker{50%{opacity:.4}}
-
+#percent{margin-top:12px;font-size:22px}
 .bar{
   width:260px;height:10px;
   border:1px solid #00ff9c;
@@ -117,8 +123,8 @@ body::after{
 .fill{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,#00ff9c,#00eaff);
-  transition:width .04s linear;
+  background:#00ff9c;
+  transition:width .05s linear;
 }
 
 footer{
@@ -133,75 +139,106 @@ footer{
 
 <body>
 
-<div class="glitch" data-text="SFS BLUEPRINT HUB">SFS BLUEPRINT HUB</div>
+<div class="glitch" data-text="SFS BLUEPRINT HUB">
+SFS BLUEPRINT HUB
+</div>
 
 <!-- ===== BP LIST ===== -->
-<div class="card">
-<div>Rocket Components</div>
+
+<div class="card" style="--i:1">
+<div>🚀 Rocket Components</div>
 <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/8zyuZFMaEe6eJ7uAd13aUA')">OPEN</button>
 </div>
 
-<div class="card">
-<div>Soyuz Blueprint</div>
+<div class="card" style="--i:2">
+<div>🇷🇺 Soyuz Blueprint</div>
 <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/CP1ahleaEe6eNLuAd13aUA')">OPEN</button>
 </div>
 
-<div class="card">
-<div>Space Shuttle + Space Cruiser</div>
+<div class="card" style="--i:3">
+<div>🛰 Space Shuttle + Space Cruiser</div>
 <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/tcCdu11SEe6eRLuAd13aUA')">OPEN</button>
 </div>
 
-<div class="card">
-<div>Rocket Components 2 (No DLC)</div>
+<div class="card" style="--i:4">
+<div>🚀 Rocket Components 2 (No DLC)</div>
 <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/zM-6lXc0Ee6edbuAd13aUA')">OPEN</button>
 </div>
 
-<div class="card">
-<div>Satellite</div>
+<div class="card" style="--i:5">
+<div>🛰 Satellite</div>
 <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/mAMsVK14Ee6LZkVkBXBP0w')">OPEN</button>
 </div>
 
-<div class="card">
-<div>Falcon Heavy with Starlink</div>
+<div class="card" style="--i:6">
+<div>🔥 Big Delta Rocket (100 Boosters)</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/TAz2FbE3Ee6LZkVkBXBP0w')">OPEN</button>
+</div>
+
+<div class="card" style="--i:7">
+<div>⚡ 1000x Efficient Rocket</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/VB0jkrHhEe6LZkVkBXBP0w')">OPEN</button>
+</div>
+
+<div class="card" style="--i:8">
+<div>☠ Impossible Challenge</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/tZC7ONyjEe6LqEVkBXBP0w')">OPEN</button>
+</div>
+
+<div class="card" style="--i:9">
+<div>🚀 Falcon Heavy with Starlink</div>
 <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/j1XwNRnrEe-3PuNyTkiz9w')">OPEN</button>
 </div>
 
-<div class="card">
-<div>Saturn V</div>
+<div class="card" style="--i:10">
+<div>🛰 Large Rocket – 18 Satellites</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/SgHYe0FDEe-ZEjmvLffn8g')">OPEN</button>
+</div>
+
+<div class="card" style="--i:11">
+<div>🌕 Saturn V</div>
 <button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/s9CLL0LFEe-ZFDmvLffn8g')">OPEN</button>
 </div>
 
-<footer>© Copyright by GODbaovn_rb 2026</footer>
+<div class="card" style="--i:12">
+<div>🛰 Large Rocket – 72 Satellites</div>
+<button class="btn" onclick="openBP('https://sharing.spaceflightsimulator.app/rocket/Evt1fFNDEe-ZLzmvLffn8g')">OPEN</button>
+</div>
+
+<footer>
+© GODbaovn_rb 2026
+</footer>
 
 <!-- overlay -->
 <div id="ov">
-  <div class="glitch" data-text="LOADING BLUEPRINT DATA">LOADING BLUEPRINT DATA</div>
+  <div class="glitch" data-text="LOADING BLUEPRINT DATA">
+    LOADING BLUEPRINT DATA
+  </div>
   <div id="percent">1%</div>
   <div class="bar"><div class="fill" id="fill"></div></div>
 </div>
 
 <script>
 function openBP(url){
-  const ov=ovEl=document.getElementById("ov");
+  const ov=document.getElementById("ov");
   const p=document.getElementById("percent");
   const f=document.getElementById("fill");
   let i=1;
   ov.style.display="flex";
   const t=setInterval(()=>{
-    i+=Math.random()*3|0;
-    if(i>=100){
-      i=100;clearInterval(t);
-      setTimeout(()=>{
-        window.open(url,"_blank");
-        ov.style.display="none";
-        f.style.width="0%";p.textContent="1%";
-      },200);
-    }
+    i++;
     p.textContent=i+"%";
     f.style.width=i+"%";
+    if(i>=100){
+      clearInterval(t);
+      window.open(url,"_blank");
+      ov.style.display="none";
+      f.style.width="0%";
+      p.textContent="1%";
+    }
   },40);
 }
 </script>
 
 </body>
-  </html>
+</html>
